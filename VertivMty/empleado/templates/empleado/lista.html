@@ -1,0 +1,68 @@
+<!-- ./employee/templates/employee/list.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Lista de Empleados</title>
+{% endblock title %}
+
+{% block content %}
+    <h1 style="text-align: center; padding-top: 1em; padding-bottom: 1em;">Informacion de Empleados</h1>
+    
+
+    <!-- Seccion de busqueda  -->
+    <div class="center-form" style="display: flex; justify-content: center;">
+        <form action="{% url 'empleados-lista' %}" method="GET" style="width: 500px;">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Busqueda por nombre de empleado, tipo, o area" aria-label="" aria-describedby="basic-addon1" style="margin-right: 10px;"
+              name="search_query" value="{{ search_query }}"/>
+    
+              <input class="btn btn-success" type="submit" value="Search"/>
+            </div>
+        </form>
+    </div>
+    <br>
+
+
+
+
+    <div class="text-center">
+        <a href="{% url 'crear-empleado' %}"><button type="button" class="btn btn-primary" style="float: right;">Agregar nuevo empleado</button></a>
+    </div>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID_Empleado</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Tipo</th>                
+                <th scope="col">Area</th>
+                <th scope="col">Spot</th>
+                <th scope="col">Supervisor</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Correo Supervisor</th>
+                <th scope="col">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in empleado %}
+                <tr>
+                    <th scope="row">{{ emp.ID_empleado }}</th>
+                    <td>{{ emp.Nombre }}</td>
+                    <td>{{ emp.Tipo }}</td>
+                    <td>{{ emp.Area }}</td>
+                    <td>{{ emp.Spot }}</td>
+                    <td>{{ emp.Supervisor }}</td>
+                    <td>{{ emp.Correo }}</td>
+                    <td>{{ emp.CorreoSupervisor }}</td>
+                    <td>
+                        <a style="margin-right: 30px;" href="{% url 'editar-empleado' emp.id %}">Editar</a>
+                        <a href="{% url 'eliminar-empleado' emp.id %}">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock content %}

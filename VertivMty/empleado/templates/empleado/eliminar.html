@@ -1,0 +1,26 @@
+<!-- ./employee/templates/employee/delete.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Eliminar</title>
+{% endblock title %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <br><br>
+        <div class="alert alert-danger" role="alert">
+            Estar segura/o de eliminar a "{{ empleado.Nombre }}"?
+        </div>
+        
+        <p>
+            <a href="{% url 'empleados-lista' %}"> <-- Regresar</a>
+        </p>
+
+        <p>
+            <input class="btn btn-danger" type="submit" value="Confirmar">
+        </p>
+    </form>
+{% endblock content %}
